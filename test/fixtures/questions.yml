@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  survey: one
+  first: 1
+  second: 1
+  operand: MyText
+  result: false
+
+two:
+  survey: two
+  first: 1
+  second: 1
+  operand: MyText
+  result: false

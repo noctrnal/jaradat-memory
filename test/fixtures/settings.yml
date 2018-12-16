@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number_questions: 1
+  minimum_value: 1
+  maximum_value: 1
+  allow_retake: false
+
+two:
+  number_questions: 1
+  minimum_value: 1
+  maximum_value: 1
+  allow_retake: false
