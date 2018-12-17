@@ -17,20 +17,25 @@ ActiveRecord::Schema.define(version: 2018_12_15_213344) do
 
   create_table "questions", force: :cascade do |t|
     t.bigint "survey_id"
+    t.integer "memory"
     t.integer "first"
-    t.integer "second"
     t.text "operand"
-    t.boolean "result"
+    t.integer "second"
+    t.integer "answer"
+    t.boolean "veracity"
+    t.integer "recall"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["survey_id"], name: "index_questions_on_survey_id"
   end
 
   create_table "settings", force: :cascade do |t|
-    t.integer "number_questions"
-    t.integer "minimum_value"
-    t.integer "maximum_value"
     t.boolean "allow_retake"
+    t.integer "delay"
+    t.integer "maximum_value"
+    t.integer "minimum_value"
+    t.integer "number_questions"
+    t.integer "number_surveys"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

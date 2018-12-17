@@ -13,3 +13,47 @@
  *= require_tree .
  *= require_self
  */
+
+.instructions {
+  text-align: center;
+
+  .example-inputs {
+    color: blue;
+    font-size: 24px;
+    text-align: center;
+  }
+}
+
+#notice {
+  text-align: center;
+}
+
+.survey {
+  text-align: center;
+
+  p {
+    display: none;
+  }
+
+  .operand, .number {
+    color: blue;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .operand {
+    width: 15px;
+  }
+
+  .number {
+    width: 55px;
+  }
+}
+
+button {
+  font-size: 24px;
+}
+
+h1 {
+  text-align: center;
+}

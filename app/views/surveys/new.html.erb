@@ -1,5 +1,63 @@
-<h1>New Survey</h1>
+<h1>Operational Span</h1>
 
-<%= render 'form', survey: @survey %>
+<div class="instructions">
+<h2>Instructions</h2>
 
-<%= link_to 'Back', surveys_path %>
+<p>This is the Operation Span task. This test measures your ability to remember information while engaging with a separate task. Each trial is made up of a presetnation phase and a recall phase.</p>
+
+<h3>Presentation Phase</h3>
+
+<p>You will be shown a number (it can be any number from <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %>) (see example 1). The number will appear for <%= Setting.first.delay %> second before being replaced with a simple equation (see example 2). You need to say if the equuation is correct or incorrect.</p>
+
+<h4>Example 1:</h4>
+
+<p class="example-inputs">64</p>
+
+<h4>Example 2:</h4>
+
+<p class="example-inputs">9 + 9 = 27</p>
+
+<h3>Recall Phase</h3>
+
+<p>One trial will be made up of <%= Setting.first.number_questions %> number-equation pairs. Once you have been given all the numbers in a trial and have judged the veracity of the equations the recall phase begins.</p>
+
+<h4>Example 3:</h3>
+
+<p class="example-inputs">Number 1:</p>
+
+<p><button id='begin'>Begin</button></p>
+</div>
+
+<div class="survey">
+<%= form_with model: @survey do |survey_form| %>
+  <%= survey_form.hidden_field :subject, :value => @survey.subject %>
+  <%= survey_form.fields_for :questions do |question_form| %>
+    <div class="questions">
+      <p class="memory">
+        <%= question_form.number_field :memory, class: 'number', :readonly => true %> 
+      </p>
+      <p class="equation">
+        <%= question_form.number_field :first, class: 'number',  :readonly => true %> 
+        <%= question_form.text_field :operand, class: 'operand', :readonly => true %> 
+        <%= question_form.number_field :second, class: 'number', :readonly => true %> = 
+        <%= question_form.number_field :answer, class: 'number', :readonly => true %>
+      </p>
+      <p class="veracity">
+        <%= question_form.radio_button :veracity, true %>
+        <%= question_form.label :veracity, "True" %>
+        <br>
+        <%= question_form.radio_button :veracity, false %>
+        <%= question_form.label :veracity, "False" %>
+        <br><br>
+        <button class="veracity-button">Submit</button>
+      </p>
+      <p class="recall">
+        Number <%= question_form.options[:child_index]+1 %>:
+        <%= question_form.number_field :recall, class: 'number' %>
+        <br><br>
+        <button class="recall-button">Submit</button>
+      </p>
+    </div>
+  <% end %>
+<% end %>
+</div>
