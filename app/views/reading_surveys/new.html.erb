@@ -1,0 +1,62 @@
+<h1>Reading Span</h1>
+
+<div class="instructions">
+<h2>Instructions</h2>
+
+<p>This is the Reading Span task. As with some of the other tasks, the information you are given to remember in serial order are digits (between <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %>). Each trial is made up of a presentation phase and a recall phase.</p>
+
+<h3>Presentation Phase</h3>
+
+<p>You will be shown a number (it can be any number from <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %>) (see example 1). The number will appear for <%= Setting.first.delay %> second before being replaced with a sentence (see example 2). You need to decide if the sentence makes sense or not.</p>
+
+<h4>Example 1:</h4>
+
+<p class="example-inputs">64</p>
+
+<h4>Example 2:</h4>
+
+<p class="example-inputs">Ducks weear tennis shoes.</p>
+
+<p>Clearly the answer here would be nonsense. Ducks (in general) do not wear shoes!</p>
+
+<h3>Recall Phase</h3>
+
+<p>One trial will be made up of <%= Setting.first.number_questions %> number-sentence pairs. Once you have been given all the numbers in a trial and have judged the veracity of the sentences the recall phase begins (see example 3).</p>
+
+<h4>Example 3:</h3>
+
+<p class="example-inputs">Number 1:</p>
+
+<p><button id='reading-begin'>Begin</button></p>
+</div>
+
+<div class="survey">
+<%= form_with model: @reading_survey do |survey_form| %>
+  <%= survey_form.hidden_field :subject, :value => @reading_survey.subject %>
+  <%= survey_form.fields_for :reading_questions do |question_form| %>
+    <div class="questions">
+      <p class="memory">
+        <%= question_form.number_field :memory, class: 'number', :readonly => true %> 
+      </p>
+      <p class="sentence">
+        <%= question_form.text_field :sentence, :readonly => true %>
+      </p>
+      <p class="veracity">
+        <%= question_form.radio_button :veracity, true %>
+        <%= question_form.label :veracity, "Makes sense" %>
+        <br>
+        <%= question_form.radio_button :veracity, false %>
+        <%= question_form.label :veracity, "Nonsense" %>
+        <br><br>
+        <button class="reading-veracity-button">Submit</button>
+      </p>
+      <p class="recall">
+        Number <%= question_form.options[:child_index]+1 %>:
+        <%= question_form.number_field :recall, class: 'number' %>
+        <br><br>
+        <button class="reading-recall-button">Submit</button>
+      </p>
+    </div>
+  <% end %>
+<% end %>
+</div>

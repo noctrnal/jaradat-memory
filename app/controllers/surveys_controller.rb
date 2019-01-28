@@ -4,6 +4,7 @@ class SurveysController < ApplicationController
   # GET /surveys/1
   # GET /surveys/1.json
   def show
+    @survey = Survey.find(params[:id])
   end
 
   # GET /surveys/new
@@ -23,10 +24,8 @@ class SurveysController < ApplicationController
     respond_to do |format|
       if @survey.save
         format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
-        format.json { render :show, status: :created, location: @survey }
       else
         format.html { render :new }
-        format.json { render json: @survey.errors, status: :unprocessable_entity }
       end
     end
   end

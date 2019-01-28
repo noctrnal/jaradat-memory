@@ -64,4 +64,52 @@ $(document).ready(function() {
       next.find('.recall').toggle();
     }
   });
+
+  $('#reading-begin').click(function(event) {
+    event.preventDefault();
+
+    $('.instructions').toggle();
+    $('.memory').first().toggle();
+
+    setTimeout(function() {
+      $('.memory').first().toggle();
+      $('.sentence').first().toggle();
+      $('.veracity').first().toggle();
+    }, 1000);
+  });
+
+  $('.reading-veracity-button').click(function(event) {
+    event.preventDefault();
+
+    if($(this).parent().parent().is(':last-of-type')) {
+      $(this).parent().toggle();
+      $(this).parent().prev().toggle();
+
+      $('.recall').first().toggle();
+    } else {
+      $(this).parent().toggle();
+      $(this).parent().prev().toggle();
+
+      var next = $(this).closest('div').next('div');
+      next.find('.memory').toggle();
+
+      setTimeout(function() {
+        next.find('.memory').toggle();
+        next.find('.sentence').toggle();
+        next.find('.veracity').toggle();
+      }, 1000);
+    }
+  });
+
+  $('.reading-recall-button').click(function(event) {
+    if($(this).parent().parent().is(':last-of-type')) {
+      $(this).parent().toggle();
+    } else {
+      event.preventDefault();
+      $(this).parent().toggle();
+
+      var next = $(this).closest('div').next('div');
+      next.find('.recall').toggle();
+    }
+  });
 });
