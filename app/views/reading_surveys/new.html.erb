@@ -38,9 +38,11 @@
       <p class="memory">
         <%= question_form.number_field :memory, class: 'number', :readonly => true %> 
       </p>
-      <p class="sentence">
-        <%= question_form.text_field :sentence, :readonly => true %>
-      </p>
+      <%= question_form.fields_for :sentence do |sentence_form| %>
+        <p class="sentence">
+          <%= sentence_form.text_field :sentence, class: 'sentence_display', :readonly => true %>
+        </p>
+      <% end %>
       <p class="veracity">
         <%= question_form.radio_button :veracity, true %>
         <%= question_form.label :veracity, "Makes sense" %>

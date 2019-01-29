@@ -43,7 +43,7 @@ class MemorySurveysController < ApplicationController
     def survey_params
       params.require(:memory_survey).permit(
         :subject,
-        questions_attributes: [
+        memory_questions_attributes: [
         :id,
         :answer,
         :first,

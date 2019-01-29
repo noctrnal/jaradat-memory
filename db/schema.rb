@@ -39,15 +39,23 @@ ActiveRecord::Schema.define(version: 2019_01_28_141437) do
     t.bigint "reading_survey_id"
     t.integer "memory"
     t.integer "recall"
-    t.text "sentence"
+    t.bigint "sentence_id"
     t.boolean "veracity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reading_survey_id"], name: "index_reading_questions_on_reading_survey_id"
+    t.index ["sentence_id"], name: "index_reading_questions_on_sentence_id"
   end
 
   create_table "reading_surveys", force: :cascade do |t|
     t.integer "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sentences", force: :cascade do |t|
+    t.text "sentence"
+    t.boolean "veracity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,4 +73,5 @@ ActiveRecord::Schema.define(version: 2019_01_28_141437) do
 
   add_foreign_key "memory_questions", "memory_surveys"
   add_foreign_key "reading_questions", "reading_surveys"
+  add_foreign_key "reading_questions", "sentences"
 end

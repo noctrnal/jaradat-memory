@@ -83,12 +83,12 @@ $(document).ready(function() {
 
     if($(this).parent().parent().is(':last-of-type')) {
       $(this).parent().toggle();
-      $(this).parent().prev().toggle();
+      $(this).parent().prev().prev().toggle();
 
       $('.recall').first().toggle();
     } else {
       $(this).parent().toggle();
-      $(this).parent().prev().toggle();
+      $(this).parent().prev().prev().toggle();
 
       var next = $(this).closest('div').next('div');
       next.find('.memory').toggle();

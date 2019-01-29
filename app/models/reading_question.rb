@@ -1,5 +1,8 @@
 class ReadingQuestion < ApplicationRecord
   belongs_to :reading_survey
+  belongs_to :sentence
+
+  accepts_nested_attributes_for :sentence
 
   after_initialize :default_values
 
@@ -17,6 +20,6 @@ class ReadingQuestion < ApplicationRecord
     end
 
     def fetch_sentence
-      "Ducks wear shoes."
+      Sentence.offset(rand(Sentence.count)).first
     end
 end

@@ -4,7 +4,7 @@ class CreateReadingQuestions < ActiveRecord::Migration[5.2]
       t.references :reading_survey, foreign_key: true
       t.integer :memory
       t.integer :recall
-      t.text :sentence
+      t.references :sentence, foreign_key: true
       t.boolean :veracity
 
       t.timestamps
