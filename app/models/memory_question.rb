@@ -1,5 +1,5 @@
-class Question < ApplicationRecord
-  belongs_to :survey
+class MemoryQuestion < ApplicationRecord
+  belongs_to :memory_survey
 
   after_initialize :default_values
 

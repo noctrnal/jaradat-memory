@@ -1,29 +1,24 @@
-class SurveysController < ApplicationController
+class MemorySurveysController < ApplicationController
   before_action :set_survey, only: []
 
-  # GET /surveys/1
-  # GET /surveys/1.json
   def show
-    @survey = Survey.find(params[:id])
+    @memory_survey = MemorySurvey.find(params[:id])
   end
 
-  # GET /surveys/new
   def new
-    @survey = Survey.new(:subject => subject)
+    @memory_survey = MemorySurvey.new(:subject => subject)
 
     Setting.first.number_questions.times do
-      @survey.questions.build
+      @memory_survey.memory_questions.build
     end
   end
 
-  # POST /surveys
-  # POST /surveys.json
   def create
-    @survey = Survey.new(survey_params)
+    @memory_survey = MemorySurvey.new(survey_params)
 
     respond_to do |format|
-      if @survey.save
-        format.html { redirect_to @survey, notice: 'Survey was successfully created.' }
+      if @memory_survey.save
+        format.html { redirect_to @memory_survey, notice: 'Survey was successfully created.' }
       else
         format.html { render :new }
       end
@@ -41,13 +36,12 @@ class SurveysController < ApplicationController
       subject
     end
 
-    def set_survey
-      @survey = Survey.find(params[:id])
+    def set_memory_survey
+      @memory_survey = MemorySurvey.find(params[:id])
     end
 
     def survey_params
-      # params.fetch(:survey, {})
-      params.require(:survey).permit(
+      params.require(:memory_survey).permit(
         :subject,
         questions_attributes: [
         :id,

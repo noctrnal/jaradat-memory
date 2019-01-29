@@ -29,9 +29,9 @@
 </div>
 
 <div class="survey">
-<%= form_with model: @survey do |survey_form| %>
-  <%= survey_form.hidden_field :subject, :value => @survey.subject %>
-  <%= survey_form.fields_for :questions do |question_form| %>
+<%= form_with model: @memory_survey do |survey_form| %>
+  <%= survey_form.hidden_field :subject, :value => @memory_survey.subject %>
+  <%= survey_form.fields_for :memory_questions do |question_form| %>
     <div class="questions">
       <p class="memory">
         <%= question_form.number_field :memory, class: 'number', :readonly => true %> 

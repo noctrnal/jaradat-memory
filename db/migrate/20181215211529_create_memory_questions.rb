@@ -1,7 +1,7 @@
-class CreateQuestions < ActiveRecord::Migration[5.2]
+class CreateMemoryQuestions < ActiveRecord::Migration[5.2]
   def change
-    create_table :questions do |t|
-      t.references :survey, foreign_key: true
+    create_table :memory_questions do |t|
+      t.references :memory_survey, foreign_key: true
       t.integer :memory
       t.integer :first
       t.text :operand

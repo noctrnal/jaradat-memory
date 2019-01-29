@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2019_01_28_141437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "questions", force: :cascade do |t|
-    t.bigint "survey_id"
+  create_table "memory_questions", force: :cascade do |t|
+    t.bigint "memory_survey_id"
     t.integer "memory"
     t.integer "first"
     t.text "operand"
@@ -26,7 +26,13 @@ ActiveRecord::Schema.define(version: 2019_01_28_141437) do
     t.integer "recall"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["survey_id"], name: "index_questions_on_survey_id"
+    t.index ["memory_survey_id"], name: "index_memory_questions_on_memory_survey_id"
+  end
+
+  create_table "memory_surveys", force: :cascade do |t|
+    t.integer "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reading_questions", force: :cascade do |t|
@@ -57,12 +63,6 @@ ActiveRecord::Schema.define(version: 2019_01_28_141437) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "surveys", force: :cascade do |t|
-    t.integer "subject"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "questions", "surveys"
+  add_foreign_key "memory_questions", "memory_surveys"
   add_foreign_key "reading_questions", "reading_surveys"
 end
