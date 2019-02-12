@@ -12,14 +12,14 @@ class ReadingQuestion < ApplicationRecord
       self.sentence ||= fetch_sentence
     end
 
+    def fetch_sentence
+      Sentence.offset(rand(Sentence.count)).first
+    end
+
     def memory_range
       @minimum_value ||= Setting.first.minimum_value
       @maximum_value ||= Setting.first.maximum_value
 
       [*@minimum_value..@maximum_value].sample
-    end
-
-    def fetch_sentence
-      Sentence.offset(rand(Sentence.count)).first
     end
 end

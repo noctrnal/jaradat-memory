@@ -35,23 +35,18 @@
     display: none;
   }
 
-  .operand, .number {
+  .number {
     color: blue;
     font-size: 24px;
     text-align: center;
-  }
-
-  .operand {
-    width: 15px;
-  }
-
-  .number {
     width: 55px;
   }
 
-  .sentence_display {
-    width: 250px;
+  .sentence_display, .equation_display {
+    color: blue;
+    font-size: 24px;
     text-align: center;
+    width: 250px;
   }
 }
 

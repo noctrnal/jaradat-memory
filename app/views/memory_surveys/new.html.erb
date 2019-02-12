@@ -30,18 +30,16 @@
 
 <div class="survey">
 <%= form_with model: @memory_survey do |survey_form| %>
-  <%= survey_form.hidden_field :subject, :value => @memory_survey.subject %>
   <%= survey_form.fields_for :memory_questions do |question_form| %>
     <div class="questions">
       <p class="memory">
         <%= question_form.number_field :memory, class: 'number', :readonly => true %> 
       </p>
-      <p class="equation">
-        <%= question_form.number_field :first, class: 'number',  :readonly => true %> 
-        <%= question_form.text_field :operand, class: 'operand', :readonly => true %> 
-        <%= question_form.number_field :second, class: 'number', :readonly => true %> = 
-        <%= question_form.number_field :answer, class: 'number', :readonly => true %>
-      </p>
+      <%= question_form.fields_for :equation do |equation_form| %>
+        <p class="equation">
+          <%= equation_form.text_field :equation, class: 'equation_display',  :readonly => true %>
+        </p>
+      <% end %>
       <p class="veracity">
         <%= question_form.radio_button :veracity, true %>
         <%= question_form.label :veracity, "True" %>

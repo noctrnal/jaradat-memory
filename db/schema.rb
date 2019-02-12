@@ -10,29 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_28_141437) do
+ActiveRecord::Schema.define(version: 2019_02_11_150653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "equations", force: :cascade do |t|
+    t.string "equation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "veracity"
+  end
+
   create_table "memory_questions", force: :cascade do |t|
     t.bigint "memory_survey_id"
     t.integer "memory"
-    t.integer "first"
-    t.text "operand"
-    t.integer "second"
-    t.integer "answer"
     t.boolean "veracity"
     t.integer "recall"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "equation_id"
+    t.index ["equation_id"], name: "index_memory_questions_on_equation_id"
     t.index ["memory_survey_id"], name: "index_memory_questions_on_memory_survey_id"
   end
 
   create_table "memory_surveys", force: :cascade do |t|
-    t.integer "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "survey_id"
+    t.integer "number_of_questions"
+    t.index ["survey_id"], name: "index_memory_surveys_on_survey_id"
   end
 
   create_table "reading_questions", force: :cascade do |t|
@@ -48,9 +55,10 @@ ActiveRecord::Schema.define(version: 2019_01_28_141437) do
   end
 
   create_table "reading_surveys", force: :cascade do |t|
-    t.integer "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "survey_id"
+    t.index ["survey_id"], name: "index_reading_surveys_on_survey_id"
   end
 
   create_table "sentences", force: :cascade do |t|
@@ -71,7 +79,22 @@ ActiveRecord::Schema.define(version: 2019_01_28_141437) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "surveys", force: :cascade do |t|
+    t.integer "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "two"
+    t.integer "three"
+    t.integer "four"
+    t.integer "five"
+    t.integer "six"
+    t.integer "seven"
+  end
+
+  add_foreign_key "memory_questions", "equations"
   add_foreign_key "memory_questions", "memory_surveys"
+  add_foreign_key "memory_surveys", "surveys"
   add_foreign_key "reading_questions", "reading_surveys"
   add_foreign_key "reading_questions", "sentences"
+  add_foreign_key "reading_surveys", "surveys"
 end

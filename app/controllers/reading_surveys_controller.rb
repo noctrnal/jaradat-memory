@@ -1,11 +1,12 @@
 class ReadingSurveysController < ApplicationController
-  before_action :set_reading_survey, only: []
+  before_action :set_reading_survey, only: [:show]
 
   def show
   end
 
   def new
-    @reading_survey = ReadingSurvey.new(:subject => subject)
+    # TODO: accept integer variable to set number of questions to build.
+    @reading_survey = ReadingSurvey.new
 
     Setting.first.number_questions.times do
       @reading_survey.reading_questions.build
@@ -25,30 +26,19 @@ class ReadingSurveysController < ApplicationController
   end
 
   private
-    def subject
-      begin
-        subject = params[:subject]
-      rescue
-        render :file => "public/401.html", :status => :unauthorized
-      end
-
-      subject
-    end
-
     def set_reading_survey
       @reading_survey = ReadingSurvey.find(params[:id])
     end
 
     def reading_survey_params
       params.require(:reading_survey).permit(
-        :subject,
         reading_questions_attributes: [
-        :id,
-        :memory,
-        :recall,
-        :sentence,
-        :veracity,
-        :_destroy,
+          :id,
+          :memory,
+          :recall,
+          :sentence,
+          :veracity,
+          :_destroy,
         ],
       )
     end

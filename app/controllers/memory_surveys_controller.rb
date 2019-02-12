@@ -1,20 +1,20 @@
 class MemorySurveysController < ApplicationController
-  before_action :set_survey, only: []
+  before_action :set_survey, only: [:show]
 
   def show
-    @memory_survey = MemorySurvey.find(params[:id])
   end
 
   def new
-    @memory_survey = MemorySurvey.new(:subject => subject)
+    @memory_survey = MemorySurvey.new
 
-    Setting.first.number_questions.times do
+    questions.to_i.times do
       @memory_survey.memory_questions.build
     end
   end
 
   def create
-    @memory_survey = MemorySurvey.new(survey_params)
+    puts 'MADE IT TO HERE'
+    @memory_survey = MemorySurvey.new(memory_survey_params)
 
     respond_to do |format|
       if @memory_survey.save
@@ -26,34 +26,29 @@ class MemorySurveysController < ApplicationController
   end
 
   private
-    def subject
+    def questions
       begin
-        subject = params[:subject]
+        questions = params[:questions]
       rescue
-        render :file => "public/401.html", :status => :unauthorized
+        render :file => "public/500.html", :status => :internal_server_error
       end
 
-      subject
+      questions
     end
 
     def set_memory_survey
       @memory_survey = MemorySurvey.find(params[:id])
     end
 
-    def survey_params
+    def memory_survey_params
       params.require(:memory_survey).permit(
-        :subject,
         memory_questions_attributes: [
-        :id,
-        :answer,
-        :first,
-        :memory,
-        :operand,
-        :recall,
-        :result,
-        :second,
-        :veracity,
-        :_destroy,
+          :id,
+          :memory,
+          :recall,
+          :equation,
+          :veracity,
+          :_destroy,
         ],
       )
     end
