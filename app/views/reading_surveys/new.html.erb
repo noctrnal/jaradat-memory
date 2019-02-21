@@ -3,11 +3,11 @@
 <div class="instructions">
 <h2>Instructions</h2>
 
-<p>This is the Reading Span task. As with some of the other tasks, the information you are given to remember in serial order are digits (between <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %>). Each trial is made up of a presentation phase and a recall phase.</p>
+<p>This is the Reading Span task. This task measures your ability to remember information while engaging in a separate task. Each trial is made up of a presentation phase and a recall phase.</p>
 
 <h3>Presentation Phase</h3>
 
-<p>You will be shown a number (it can be any number from <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %>) (see example 1). The number will appear for <%= Setting.first.delay %> second before being replaced with a sentence (see example 2). You need to decide if the sentence makes sense or not.</p>
+<p>You will be shown a number from <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %> (see example 1). The number will appear for <%= Setting.first.delay %> second before being replaced with a sentence (see example 2). You need to decide if the sentence makes sense or is nonsense.</p>
 
 <h4>Example 1:</h4>
 
@@ -21,11 +21,13 @@
 
 <h3>Recall Phase</h3>
 
-<p>One trial will be made up of <%= Setting.first.number_questions %> number-sentence pairs. Once you have been given all the numbers in a trial and have judged the veracity of the sentences the recall phase begins (see example 3).</p>
+<p>After all of the number/sentence trials have been presented, you will see the screen in Example 3 for each of the numbers that were presented for you to remember (from 2–7 numbers). For example, if you were presented with three numbers (followed by three sentences), you will see three of these screens.</p>
 
 <h4>Example 3:</h3>
 
 <p class="example-inputs">Number 1:</p>
+
+<p>You should type in the number you remember being presented first in the box and click the SUBMIT button. You should report the numbers in the same order that they were presented.</p>
 
 <p><button id='reading-begin'>Begin</button></p>
 </div>

@@ -3,11 +3,11 @@
 <div class="instructions">
 <h2>Instructions</h2>
 
-<p>This is the Operation Span task. This test measures your ability to remember information while engaging with a separate task. Each trial is made up of a presetnation phase and a recall phase.</p>
+<p>This is the Operation Span task. This test measures your ability to remember information while engaging with a separate task. Each trial is made up of a presentation phase and a recall phase.</p>
 
 <h3>Presentation Phase</h3>
 
-<p>You will be shown a number (it can be any number from <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %>) (see example 1). The number will appear for <%= Setting.first.delay %> second before being replaced with a simple equation (see example 2). You need to say if the equuation is correct or incorrect.</p>
+<p>You will be shown a number (it can be any number from <%= Setting.first.minimum_value %>-<%= Setting.first.maximum_value %>) (see example 1). The number will appear for <%= Setting.first.delay %> second before being replaced with a simple equation (see example 2). You need to say if the equation is true or false.</p>
 
 <h4>Example 1:</h4>
 
@@ -17,13 +17,17 @@
 
 <p class="example-inputs">9 + 9 = 27</p>
 
+<p>For every number you are presented, an equation will follow. It is just as important to judge the equations correctly as it is to remember the numbers. If you remember the numbers but get the equation wrong, you will fail that trial.</p>
+
 <h3>Recall Phase</h3>
 
-<p>One trial will be made up of <%= Setting.first.number_questions %> number-equation pairs. Once you have been given all the numbers in a trial and have judged the veracity of the equations the recall phase begins (see example 3).</p>
+<p>You will see the screen in Example 3 for each of the numbers that were presented for you to remember (from 2–7 numbers). For example, if you were presented with three numbers (followed by three equations), you will see three of these screens.</p>
 
 <h4>Example 3:</h3>
 
 <p class="example-inputs">Number 1:</p>
+
+<p>You should type in the number you remember being presented first in the box and click the SUBMIT button. You should report the numbers in the same order that they were presented.</p>
 
 <p><button id='begin'>Begin</button></p>
 </div>
