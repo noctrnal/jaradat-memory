@@ -83,12 +83,12 @@ ActiveRecord::Schema.define(version: 2019_02_11_150653) do
     t.integer "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "two"
-    t.integer "three"
-    t.integer "four"
-    t.integer "five"
-    t.integer "six"
-    t.integer "seven"
+    t.integer "two", default: 0
+    t.integer "three", default: 0
+    t.integer "four", default: 0
+    t.integer "five", default: 0
+    t.integer "six", default: 0
+    t.integer "seven", default: 0
   end
 
   add_foreign_key "memory_questions", "equations"

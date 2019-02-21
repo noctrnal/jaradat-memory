@@ -30,6 +30,7 @@
 
 <div class="survey">
 <%= form_with model: @memory_survey do |survey_form| %>
+  <%= survey_form.hidden_field :subject, value: @subject %>
   <%= survey_form.fields_for :memory_questions do |question_form| %>
     <div class="questions">
       <p class="memory">

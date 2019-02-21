@@ -6,6 +6,7 @@ class MemorySurveysController < ApplicationController
 
   def new
     @memory_survey = MemorySurvey.new
+    @subject = subject
 
     questions.to_i.times do
       @memory_survey.memory_questions.build
@@ -13,12 +14,12 @@ class MemorySurveysController < ApplicationController
   end
 
   def create
-    puts 'MADE IT TO HERE'
     @memory_survey = MemorySurvey.new(memory_survey_params)
+    @memory_survey.survey_id = Survey.find_by(:subject => subject_post_submit).id
 
     respond_to do |format|
       if @memory_survey.save
-        format.html { redirect_to @memory_survey, notice: 'Survey was successfully created.' }
+        format.html { redirect_to new_survey_path :subject => subject_post_submit}
       else
         format.html { render :new }
       end
@@ -42,14 +43,35 @@ class MemorySurveysController < ApplicationController
 
     def memory_survey_params
       params.require(:memory_survey).permit(
+        :survey,
         memory_questions_attributes: [
           :id,
+          :equation,
           :memory,
           :recall,
-          :equation,
           :veracity,
           :_destroy,
         ],
       )
+    end
+
+    def subject
+      begin
+        subject = params[:subject]
+      rescue
+        render :file => "public/401.html", :status => :unauthorized
+      end
+
+      subject
+    end
+
+    def subject_post_submit
+      begin
+        subject = params[:memory_survey][:subject]
+      rescue
+        render :file => "public/401.html", :status => :unauthorized
+      end
+
+      subject
     end
 end

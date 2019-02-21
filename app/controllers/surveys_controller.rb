@@ -2,10 +2,59 @@ class SurveysController < ApplicationController
   before_action :set_survey, only: [:show]
 
   def new
-    @survey = Survey.new(:subject => subject)
+    @survey = Survey.find_by(:subject => subject)
+    unless @survey
+      @survey = Survey.create(:subject => subject)
+    end
 
-    # @survey.memory_survey.new(:number_of_questions => 2)
-    redirect_to controller: 'memory_surveys', action: 'new', questions: '2'
+    # add question logic here
+    @possibles = []
+
+    if @survey.two < 3
+      @possibles << 2
+    end
+    if @survey.three < 3
+      @possibles << 3
+    end
+    if @survey.four < 3
+      @possibles << 4
+    end
+    if @survey.five < 3
+      @possibles << 5
+    end
+    if @survey.six < 3
+      @possibles << 6
+    end
+    if @survey.seven < 3
+      @possibles << 7
+    end
+
+    @questions = @possibles.sample
+
+    case @questions
+    when 2
+      @survey.two += 1
+    when 3
+      @survey.three += 1
+    when 4
+      @survey.four += 1
+    when 5
+      @survey.five += 1
+    when 6
+      @survey.six += 1
+    when 7
+      @survey.seven += 1
+    end
+
+    @survey.save
+
+    @operational = true
+
+    unless @questions
+      @operational = false
+    end
+
+    # add logic for reading span
   end
 
   def show
@@ -30,5 +79,22 @@ class SurveysController < ApplicationController
       params.require(:survey).permit(
         :subject,
       )
+    end
+
+    def word_form(number)
+      case number
+      when 2
+        "two"
+      when 3
+        "three"
+      when 4
+        "four"
+      when 5
+        "five"
+      when 6
+        "six"
+      when 7
+        "seven"
+      end
     end
 end
