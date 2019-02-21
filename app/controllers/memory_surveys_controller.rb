@@ -19,6 +19,25 @@ class MemorySurveysController < ApplicationController
 
     respond_to do |format|
       if @memory_survey.save
+        questions = @memory_survey.memory_questions.count
+
+        case questions
+        when 2
+          @memory_survey.survey.two += 1
+        when 3
+          @memory_survey.survey.three += 1
+        when 4
+          @memory_survey.survey.four += 1
+        when 5
+          @memory_survey.survey.five += 1
+        when 6
+          @memory_survey.survey.six += 1
+        when 7
+          @memory_survey.survey.seven += 1
+        end
+
+        @memory_survey.survey.save
+
         format.html { redirect_to new_survey_path :subject => subject_post_submit}
       else
         format.html { render :new }
