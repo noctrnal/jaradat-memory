@@ -161,5 +161,7 @@ sentences = [
 ]
 
 sentences.each do |sentence, veracity|
-  Sentence.create(sentence: sentence, veracity: veracity )
+  Sentence.create(sentence: sentence, veracity: veracity)
 end
+
+Setting.create(allow_retake: true, delay: 1, maximum_value: 99, minimum_value: 1, surveys: 3)

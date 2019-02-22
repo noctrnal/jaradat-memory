@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_11_150653) do
+ActiveRecord::Schema.define(version: 2019_02_22_001647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2019_02_11_150653) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "survey_id"
-    t.integer "number_of_questions"
     t.index ["survey_id"], name: "index_memory_surveys_on_survey_id"
   end
 
@@ -73,22 +72,27 @@ ActiveRecord::Schema.define(version: 2019_02_11_150653) do
     t.integer "delay"
     t.integer "maximum_value"
     t.integer "minimum_value"
-    t.integer "number_questions"
-    t.integer "number_surveys"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "surveys"
   end
 
   create_table "surveys", force: :cascade do |t|
     t.integer "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "two", default: 0
-    t.integer "three", default: 0
-    t.integer "four", default: 0
-    t.integer "five", default: 0
-    t.integer "six", default: 0
-    t.integer "seven", default: 0
+    t.integer "two_memory", default: 0
+    t.integer "three_memory", default: 0
+    t.integer "four_memory", default: 0
+    t.integer "five_memory", default: 0
+    t.integer "six_memory", default: 0
+    t.integer "seven_memory", default: 0
+    t.integer "two_reading", default: 0
+    t.integer "three_reading", default: 0
+    t.integer "four_reading", default: 0
+    t.integer "five_reading", default: 0
+    t.integer "six_reading", default: 0
+    t.integer "seven_reading", default: 0
   end
 
   add_foreign_key "memory_questions", "equations"

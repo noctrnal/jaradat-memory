@@ -3,6 +3,8 @@
 <div class="instructions">
 <% if @operational %>
   <%= link_to "Begin operational span", new_memory_survey_path(subject: @survey.subject, questions: @questions), data: { turbolinks: false } %>
+<% elsif @reading %>
+  <%= link_to "Begin reading span", new_reading_survey_path(subject: @survey.subject, questions: @questions), data: { turbolinks: false } %>
 <% else %>
   <p>Thank you for participating. Your surveys are now complete.</p>
 <% end %>

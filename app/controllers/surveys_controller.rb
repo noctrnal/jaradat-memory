@@ -7,54 +7,62 @@ class SurveysController < ApplicationController
       @survey = Survey.create(:subject => subject)
     end
 
-    # add question logic here
-    @possibles = []
-
-    if @survey.two < 3
-      @possibles << 2
-    end
-    if @survey.three < 3
-      @possibles << 3
-    end
-    if @survey.four < 3
-      @possibles << 4
-    end
-    if @survey.five < 3
-      @possibles << 5
-    end
-    if @survey.six < 3
-      @possibles << 6
-    end
-    if @survey.seven < 3
-      @possibles << 7
-    end
-
-    @questions = @possibles.sample
-
-    #case @questions
-    #when 2
-    #  @survey.two += 1
-    #when 3
-    #  @survey.three += 1
-    #when 4
-    #  @survey.four += 1
-    #when 5
-    #  @survey.five += 1
-    #when 6
-    #  @survey.six += 1
-    #when 7
-    #  @survey.seven += 1
-    #end
-
-    #@survey.save
-
     @operational = true
+    @possibles_memory = []
+    @possibles_reading = []
+    @reading = true
+
+    if @survey.two_memory < 3
+      @possibles_memory << 2
+    end
+    if @survey.three_memory < 3
+      @possibles_memory << 3
+    end
+    if @survey.four_memory < 3
+      @possibles_memory << 4
+    end
+    if @survey.five_memory < 3
+      @possibles_memory << 5
+    end
+    if @survey.six_memory < 3
+      @possibles_memory << 6
+    end
+    if @survey.seven_memory < 3
+      @possibles_memory << 7
+    end
+
+    @questions = @possibles_memory.sample
 
     unless @questions
       @operational = false
     end
 
-    # add logic for reading span
+    unless @operational
+      if @survey.two_reading < 3
+        @possibles_reading << 2
+      end
+      if @survey.three_reading < 3
+        @possibles_reading << 3
+      end
+      if @survey.four_reading < 3
+        @possibles_reading << 4
+      end
+      if @survey.five_reading < 3
+        @possibles_reading << 5
+      end
+      if @survey.six_reading < 3
+        @possibles_reading << 6
+      end
+      if @survey.seven_reading < 3
+        @possibles_reading << 7
+      end
+
+      @questions = @possibles_reading.sample
+
+      unless @questions
+        @reading = false
+      end
+    end
   end
 
   def show
